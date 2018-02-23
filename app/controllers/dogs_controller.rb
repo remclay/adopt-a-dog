@@ -11,7 +11,7 @@ class DogsController < ApplicationController
 
   get '/dogs/new' do
     if Helpers.logged_in?(session)
-      @breeds = Dog.all.collect{|d| d.breed}.uniq
+      @breeds = Breed.all.uniq
       erb :'dogs/create_dog'
     else
       redirect to '/login'
@@ -22,7 +22,11 @@ class DogsController < ApplicationController
     if params[:name] != "" && params[:age] != ""
       @dog = Dog.create(params[:dog])
       @dog.user_id = session[:id]
+      if params[:breed] != ""
+        @dog.breeds << Breed.create(params[:breed])
+      end
       @dog.save
+      redirect to "/dogs/#{@dog.id}"
     end
   end
 

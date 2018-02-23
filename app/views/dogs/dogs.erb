@@ -4,6 +4,8 @@
   <h3><%= dog.name %></h3>
   <h4>Age:</h4>
   <p><%= dog.age %></p>
-  <h4>Breed:</h4>
-  <p><%= dog.breed %></p>
+  <h4>Breed(s):</h4>
+  <% dog.breeds.each do |breed|%>
+    <p><%= breed.name %></p>
+  <% end %>
 <% end %>

@@ -25,4 +25,37 @@ class DogsController < ApplicationController
       @dog.save
     end
   end
+
+  get '/dogs/:id' do
+    if Helpers.logged_in?(session)
+      @dog = Dog.find_by_id(params[:id])
+      erb :'dogs/show_dog'
+    else
+      redirect to '/login'
+    end
+  end
+
+  #EDIT
+  get 'dogs/:id/edit' do
+    if @user = Helpers.logged_in?(session)
+      @dog = Dog.find_by_id(params[:id])
+      if @user && @user.id = @dog.user_id
+        erb :'/dogs/edit_dog'
+      else
+        redirect to '/login'
+      end
+    else
+      redirect to '/login'
+    end
+  end
+
+  patch 'dogs/:id' do
+    if Helpers.logged_in?(session) && params[:name] != "" && params[:age] != ""
+      @dog = Dog.find_by_id(params[:id])
+      @dog.update(params[:dog])
+      redirect to "/dogs/#{@dog.id}"
+    else
+      redirect to '/login'
+    end
+  end
 end

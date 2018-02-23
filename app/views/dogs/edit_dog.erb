@@ -1,0 +1,18 @@
+<h1>Edit information for <%= @dog.name %>!</h1>
+
+<form action="/dogs/:id" method="post">
+  <input type="hidden" id="hidden" name="_method" value="patch">
+
+  <label><h4>Name:</h4></label>
+  <input type="text" name="dog[name]" value="<%= @dog.name %>">
+
+  <label><h4>Age:</h4></label>
+  <input type="text" name="dog[age]" value="<%= @dog.age %>">
+
+  <label><h4>Breed:</h4></label>
+  <input type="text" name="dog[breed]" value="<%= @dog.breed %>">
+
+  <br></br>
+  <input type="submit" value="Update dog details">
+
+</form>

@@ -1,0 +1,17 @@
+<h1>Dogs you have posted for adoption:</h1>
+
+<% @dogs.each do |dog| %>
+  <h2><%= dog.name %></h2>
+  <h4>Dog age: </h4><%= dog.age %>
+  <h4>Dog breed: </h4><%= dog.breed %>
+
+  <br></br>
+  <a href="/dogs/<%= dog.id %>/edit">Edit dog adoption details </a>
+  <br></br>
+  <form action="/dogs/<%= dog.id %>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Remove dog for adoption">
+  </form>
+  <br>
+
+<% end %>

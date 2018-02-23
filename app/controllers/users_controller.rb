@@ -1,5 +1,15 @@
 class UsersController < ApplicationController
 
+  get '/users/:slug' do
+    @user = User.find_by_slug(params[:slug])
+    if @user
+      @dogs = @user.dogs
+      erb :'users/show'
+    else
+      redirect to '/login'
+    end
+  end
+
   get '/signup' do
     if !Helpers.logged_in?(session)
       erb :'users/create_user'
@@ -45,5 +55,4 @@ class UsersController < ApplicationController
     end
       redirect to '/'
   end
-
 end

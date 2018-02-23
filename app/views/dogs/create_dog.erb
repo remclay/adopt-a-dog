@@ -1,0 +1,24 @@
+<h1>Add a new dog for adoption!</h1>
+
+<form action="/dogs" method="post">
+
+  <label><h4>Name:</h4></label>
+  <input type="text" name="dog[name]">
+
+  <label><h4>Age:</h4></label>
+  <input type="text" name="dog[age]">
+
+  <label><h4>Breed:</h4></label>
+  <!-- <h5>Choose from existing breed:</h5>
+    <% @breeds.each do |breed| %>
+       <label><%= breed %></label>
+       <input type="checkbox" name="dog[breed][]" value="<%= breed %>"><br>
+    <% end %> -->
+
+  <!-- <h5>and/or create a new breed:<h5> -->
+  <input type="text" name="dog[breed]">
+
+  <br></br>
+  <input type="submit" value="Add new dog">
+
+</form>

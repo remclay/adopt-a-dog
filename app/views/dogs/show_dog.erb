@@ -2,3 +2,8 @@
 
 <h4>Dog age: </h4><%= @dog.age %>
 <h4>Dog breed: </h4><%= @dog.breed %>
+
+<form action="/dogs/<%= @dog.id %>/delete" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Remove dog for adoption">
+</form>

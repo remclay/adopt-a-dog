@@ -59,10 +59,10 @@ class DogsController < ApplicationController
     end
   end
 
-  delete 'dogs/:id/delete' do
+  delete '/dogs/:id/delete' do
     if Helpers.logged_in?(session)
       @dog = Dog.find_by_id(params[:id])
-      if @dog && @dog.user = Helper.current_user(session)
+      if @dog && @dog.user = Helpers.current_user(session)
         @dog.delete
         #Add message or additional view
       end

@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_many :dogs
+  has_many :breeds, through: :dogs
+
   has_secure_password
   #validates_presence_of :username, :email, :password
 

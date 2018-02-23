@@ -2,7 +2,8 @@
 
 <% @dogs.each do |dog| %>
   <h3><%= dog.name %></h3>
-  <li><%= dog.age %></li>
-  <li><%= dog.breed %></li>
-  
+  <h4>Age:</h4>
+  <p><%= dog.age %></p>
+  <h4>Breed:</h4>
+  <p><%= dog.breed %></p>
 <% end %>

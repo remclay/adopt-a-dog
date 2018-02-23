@@ -59,6 +59,7 @@ class DogsController < ApplicationController
     end
   end
 
+  #DELETE
   delete '/dogs/:id/delete' do
     if Helpers.logged_in?(session)
       @dog = Dog.find_by_id(params[:id])

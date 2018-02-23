@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20180223221024) do
   create_table "dogs", force: :cascade do |t|
     t.string "name"
     t.string "age"
-    t.string "breed"
     t.integer "user_id"
   end
 

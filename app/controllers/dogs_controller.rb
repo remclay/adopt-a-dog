@@ -58,4 +58,17 @@ class DogsController < ApplicationController
       redirect to '/login'
     end
   end
+
+  delete 'dogs/:id/delete' do
+    if Helpers.logged_in?(session)
+      @dog = Dog.find_by_id(params[:id])
+      if @dog && @dog.user = Helper.current_user(session)
+        @dog.delete
+        #Add message or additional view
+      end
+      redirect to '/dogs'
+    else
+      redirect to '/login'
+    end
+  end
 end

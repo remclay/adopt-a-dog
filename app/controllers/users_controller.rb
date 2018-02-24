@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class UsersController < ApplicationController
+  use Rack::Flash
 
   get '/users/:slug' do
     @user = User.find_by_slug(params[:slug])
@@ -25,6 +28,7 @@ class UsersController < ApplicationController
       redirect to '/dogs'
     else
       #error message
+      flash[:message] = @user.errors.full_messages.first
       redirect to '/signup'
     end
   end

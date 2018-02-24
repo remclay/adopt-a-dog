@@ -1,6 +1,9 @@
-<h1>View all available dogs!</h1>
-
+<h1>Viewing all available dogs!</h1>
+<br>
+<a href="/users/<%= @user.slug %>">Click here </a>to only view dogs posted by you
+<br>
 <% @dogs.each do |dog| %>
+
   <h3><%= dog.name %></h3>
   <h4>Age:</h4>
   <p><%= dog.age %></p>
@@ -8,9 +11,20 @@
   <% dog.breeds.each do |breed|%>
     <p><%= breed.name %></p>
   <% end %>
+
+  <% if dog.user_id == Helpers.current_user(session).id %>
+    <a href="/dogs/<%= dog.id %>/edit">Edit dog adoption details </a>
+    <br>
+
+    <form action="/dogs/<%= dog.id %>/delete" method="post">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+      <input type="submit" value="Remove dog for adoption">
+    </form>
+  <% end %>
+
 <% end %>
 
-<br></br>
-<a href="/users/<%= @user.slug %>">Only view dogs you have posted</a>
+<br>
+<a href="/dogs/new">Post a new dog for adoption</a>
 <br>
 <a href="/logout">Log out</a>

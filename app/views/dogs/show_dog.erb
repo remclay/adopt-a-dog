@@ -6,7 +6,12 @@
   <p><%= breed.name %></p>
 <% end %>
 
-<form action="/dogs/<%= @dog.id %>/delete" method="post">
-  <input type="hidden" id="hidden" name="_method" value="delete">
-  <input type="submit" value="Remove dog for adoption">
-</form>
+<% if @dog.user_id == Helpers.current_user(session).id %>
+  <a href="/dogs/<%= @dog.id %>/edit">Edit dog adoption details </a>
+  <br>
+
+  <form action="/dogs/<%= @dog.id %>/delete" method="post">
+    <input type="hidden" id="hidden" name="_method" value="delete">
+    <input type="submit" value="Remove dog for adoption">
+  </form>
+<% end %>

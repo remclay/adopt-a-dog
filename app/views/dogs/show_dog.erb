@@ -1,7 +1,10 @@
 <h1><%= @dog.name %>!</h1>
 
 <h4>Dog age: </h4><%= @dog.age %>
-<h4>Dog breed: </h4><%= @dog.breed %>
+<h4>Dog breed: </h4>
+<% @dog.breeds.each do |breed|%>
+  <p><%= breed.name %></p>
+<% end %>
 
 <form action="/dogs/<%= @dog.id %>/delete" method="post">
   <input type="hidden" id="hidden" name="_method" value="delete">

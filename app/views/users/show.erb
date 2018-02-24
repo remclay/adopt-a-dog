@@ -3,10 +3,14 @@
 <% @dogs.each do |dog| %>
   <h2><%= dog.name %></h2>
   <h4>Dog age: </h4><%= dog.age %>
-  <h4>Dog breed: </h4><%= dog.breed %>
+  <h4>Dog breed(s): </h4>
+    <% dog.breeds.each do |breed|%>
+      <p><%= breed.name %></p>
+    <% end %>
 
   <br></br>
   <a href="/dogs/<%= dog.id %>/edit">Edit dog adoption details </a>
+
   <br></br>
   <form action="/dogs/<%= dog.id %>/delete" method="post">
     <input type="hidden" id="hidden" name="_method" value="delete">

@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   has_many :breeds, :through => :dogs
 
   has_secure_password
-  #validates_presence_of :username, :email, :password
+  validates_presence_of :username, :email, :password
+  validates :username, uniqueness: true
 
   def slug
     self.username.gsub(/[!?,'." "]/, '-').downcase

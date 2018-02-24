@@ -19,9 +19,8 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    if params[:username] != "" && params[:email] != "" && params[:password] != ""
-      #use validation
-      @user = User.create(params)
+    @user = User.create(params)
+    if @user.save
       session[:id] = @user.id
       redirect to '/dogs'
     else

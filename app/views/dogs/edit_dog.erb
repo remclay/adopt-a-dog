@@ -9,8 +9,16 @@
   <label><h4>Age:</h4></label>
   <input type="text" name="dog[age]" value="<%= @dog.age %>">
 
-  <label><h4>Breed:</h4></label>
-  <input type="text" name="dog[breed]" value="<%= @dog.breed %>">
+  <label><h4>Breed(s):</h4></label>
+
+  <% @dog.breeds.each do |breed| %>
+     <label><%= breed.name %></label>
+     <input type="checkbox" id="<%= breed.id %>" name="dog[breed_ids][]" value="<%= breed.id %>" <%='checked' if @dog.breeds.include?(breed) %>>
+     <br>
+  <% end %>
+
+  <h5>and/or create a new breed:<h5>
+  <input type="text" id="new_breed" name="breed[name]">
 
   <br></br>
   <input type="submit" value="Update dog details">

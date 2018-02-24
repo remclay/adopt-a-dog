@@ -1,7 +1,11 @@
+<% if flash.has?(:message) %>
+  <h3><%= flash[:message] %></h3>
+<% end %>
+
 <h1><%= @dog.name %>!</h1>
 
 <h4>Dog age: </h4><%= @dog.age %>
-<h4>Dog breed: </h4>
+<h4>Dog breed(s): </h4>
 <% @dog.breeds.each do |breed|%>
   <p><%= breed.name %></p>
 <% end %>

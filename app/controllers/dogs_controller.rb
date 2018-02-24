@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class DogsController < ApplicationController
+  use Rack::Flash
 
   get '/dogs' do
     if Helpers.logged_in?(session)
@@ -27,6 +30,7 @@ class DogsController < ApplicationController
         @dog.breeds << Breed.create(params[:breed])
       end
       @dog.save
+      flash[:message] = "New dog successfully added for adoption!"
       redirect to "/dogs/#{@dog.id}"
     end
   end
@@ -41,8 +45,8 @@ class DogsController < ApplicationController
   end
 
   #EDIT
-  get 'dogs/:id/edit' do
-    if @user = Helpers.logged_in?(session)
+  get '/dogs/:id/edit' do
+    if @user = Helpers.current_user(session)
       @dog = Dog.find_by_id(params[:id])
       if @user && @user.id = @dog.user_id
         erb :'/dogs/edit_dog'
@@ -58,6 +62,7 @@ class DogsController < ApplicationController
     if Helpers.logged_in?(session) && params[:name] != "" && params[:age] != ""
       @dog = Dog.find_by_id(params[:id])
       @dog.update(params[:dog])
+      flash[:message] = "Dog adoption details successfully updated!"
       redirect to "/dogs/#{@dog.id}"
     else
       redirect to '/login'
@@ -70,7 +75,7 @@ class DogsController < ApplicationController
       @dog = Dog.find_by_id(params[:id])
       if @dog && @dog.user = Helpers.current_user(session)
         @dog.delete
-        #Add message or additional view
+        flash[:message] = "Dog successfully removed from adoption!"
       end
       redirect to '/dogs'
     else

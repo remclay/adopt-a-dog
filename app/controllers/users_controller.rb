@@ -27,7 +27,6 @@ class UsersController < ApplicationController
       session[:id] = @user.id
       redirect to '/dogs'
     else
-      #error message
       flash[:message] = @user.errors.full_messages.first
       redirect to '/signup'
     end

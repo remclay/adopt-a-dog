@@ -1,11 +1,11 @@
+<% if flash.has?(:message) %>
+  <h3><%= flash[:message] %></h3>
+<% end %>
+
 <h1>Viewing all available dogs!</h1>
 <br>
 <a href="/users/<%= @user.slug %>">Click here </a>to only view dogs posted by you
 <br>
-
-<% if flash.has?(:message) %>
-  <h3><%= flash[:message] %></h3>
-<% end %>
 
 <% @dogs.each do |dog| %>
 

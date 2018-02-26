@@ -23,15 +23,18 @@ class DogsController < ApplicationController
   end
 
   post '/dogs' do
-    if params[:name] != "" && params[:age] != ""
-      @dog = Dog.create(params[:dog])
+    @dog = Dog.create(params[:dog])
+    if @dog.save
       @dog.user_id = session[:id]
       if params[:breed] != ""
         @dog.breeds << Breed.create(params[:breed])
+        @dog.save
       end
-      @dog.save
-      flash[:message] = "New dog successfully added for adoption!"
-      redirect to "/dogs/#{@dog.id}"
+    flash[:message] = "New dog successfully added for adoption!"
+    redirect to "/dogs/#{@dog.id}"
+    else
+      flash[:message] = @dog.errors.full_messages.first
+      redirect to '/signup'
     end
   end
 
@@ -58,14 +61,15 @@ class DogsController < ApplicationController
     end
   end
 
-  patch 'dogs/:id' do
-    if Helpers.logged_in?(session) && params[:name] != "" && params[:age] != ""
-      @dog = Dog.find_by_id(params[:id])
-      @dog.update(params[:dog])
+  patch '/dogs/:id' do
+    @dog = Dog.find_by_id(params[:id])
+    @dog.update(params[:dog])
+    if Helpers.logged_in?(session) && @dog.save
       flash[:message] = "Dog adoption details successfully updated!"
       redirect to "/dogs/#{@dog.id}"
     else
-      redirect to '/login'
+      flash[:message] = @dog.errors.full_messages.first
+      redirect to "/dogs/#{@dog.id}"
     end
   end
 

@@ -26,7 +26,7 @@ class DogsController < ApplicationController
     @dog = Dog.create(params[:dog])
     if @dog.save
       @dog.user_id = session[:id]
-      if params[:breed] != ""
+      if params[:breed][:name] != ""
         @dog.breeds << Breed.create(params[:breed])
         @dog.save
       end

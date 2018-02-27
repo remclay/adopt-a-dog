@@ -1,4 +1,6 @@
-<h1>Edit information for <%= @dog.name %>!</h1>
+<div class="page-header">
+  <h1>Edit information for <%= @dog.name %>!</h1>
+</div>
 
 <form action="/dogs/<%= @dog.id %>" method="post">
   <input type="hidden" id="hidden" name="_method" value="patch">

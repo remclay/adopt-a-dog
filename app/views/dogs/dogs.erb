@@ -5,9 +5,9 @@
 <div class="page-header">
   <h1>Viewing all available dogs!</h1>
 <div class="page-header">
-  
+
 <br>
-<a href="/users/<%= @user.slug %>">Click here </a>to only view dogs posted by you
+<a href="/users/<%= @user.slug %>" class="btn btn-primary">Dogs I've listed</a>
 <br>
 
 <% @dogs.each do |dog| %>
@@ -21,18 +21,18 @@
   <% end %>
 
   <% if dog.user_id == Helpers.current_user(session).id %>
-    <a href="/dogs/<%= dog.id %>/edit">Edit dog adoption details </a>
+    <a href="/dogs/<%= dog.id %>/edit" class="btn btn-primary">Edit dog adoption details </a>
     <br>
 
     <form action="/dogs/<%= dog.id %>/delete" method="post">
       <input type="hidden" id="hidden" name="_method" value="delete">
-      <input type="submit" value="Remove dog for adoption">
+      <input type="submit" class="btn btn-primary" value="Remove dog for adoption">
     </form>
   <% end %>
 
 <% end %>
 
 <br>
-<a href="/dogs/new">Post a new dog for adoption</a>
-<br>
-<a href="/logout">Log out</a>
+<a href="/dogs/new" class="btn btn-primary">Post a new dog for adoption</a>
+<br><br>
+<a href="/logout" class="btn btn-link">Log out</a>

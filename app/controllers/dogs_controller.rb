@@ -65,6 +65,10 @@ class DogsController < ApplicationController
     @dog = Dog.find_by_id(params[:id])
     @dog.update(params[:dog])
     if Helpers.logged_in?(session) && @dog.save
+      if params[:breed][:name] != ""
+        @dog.breeds << Breed.create(params[:breed])
+        @dog.save
+      end
       flash[:message] = "Dog adoption details successfully updated!"
       redirect to "/dogs/#{@dog.id}"
     else

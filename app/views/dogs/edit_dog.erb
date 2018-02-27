@@ -1,28 +1,31 @@
 <div class="page-header">
-  <h1>Edit information for <%= @dog.name %>!</h1>
+  <h1>Edit information for <%= @dog.name %></h1>
 </div>
 
-<form action="/dogs/<%= @dog.id %>" method="post">
-  <input type="hidden" id="hidden" name="_method" value="patch">
+<div class="jumbotron">
+  <form action="/dogs/<%= @dog.id %>" method="post">
+    <input type="hidden" id="hidden" name="_method" value="patch">
 
-  <label><h4>Name:</h4></label>
-  <input type="text" name="dog[name]" value="<%= @dog.name %>">
+    <label><h4>Name:</h4></label>
+    <input type="text" name="dog[name]" value="<%= @dog.name %>">
+    <br>
 
-  <label><h4>Age:</h4></label>
-  <input type="text" name="dog[age]" value="<%= @dog.age %>">
+    <label><h4>Age:</h4></label>
+    <input type="text" name="dog[age]" value="<%= @dog.age %>">
+    <br>
 
-  <label><h4>Breed(s):</h4></label>
+    <label><h4>Breed(s):</h4></label>
+    <h5>Choose from existing breed:</h5>
+    <% @dog.breeds.each do |breed| %>
+       <label><%= breed.name %></label>
+       <input type="checkbox" id="<%= breed.id %>" name="dog[breed_ids][]" value="<%= breed.id %>" <%='checked' if @dog.breeds.include?(breed) %>>
+       <br>
+    <% end %>
 
-  <% @dog.breeds.each do |breed| %>
-     <label><%= breed.name %></label>
-     <input type="checkbox" id="<%= breed.id %>" name="dog[breed_ids][]" value="<%= breed.id %>" <%='checked' if @dog.breeds.include?(breed) %>>
-     <br>
-  <% end %>
+    <h5>and/or create a new breed:<h5>
+    <input type="text" id="new_breed" name="breed[name]">
+    <br></br>
 
-  <h5>and/or create a new breed:<h5>
-  <input type="text" id="new_breed" name="breed[name]">
-
-  <br></br>
-  <input type="submit" class="btn btn-primary" value="Update dog details">
-
-</form>
+    <button type="submit" class="btn btn-primary" name="button">Update dog details <span class="glyphicon glyphicon-thumbs-up"> </span></button>
+  </form>
+</div>

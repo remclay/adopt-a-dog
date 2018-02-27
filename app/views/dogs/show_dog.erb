@@ -3,21 +3,24 @@
 <% end %>
 
 <div class="page-header">
-  <h1><%= @dog.name %>!</h1>
+  <h1><%= @dog.name %></h1>
 </div>
 
-<h4>Dog age: </h4><%= @dog.age %>
-<h4>Dog breed(s): </h4>
-<% @dog.breeds.each do |breed|%>
-  <p><%= breed.name %></p>
-<% end %>
+<div class="jumbotron">
+  <h3>Dog age: </h3>
+  <p><%= @dog.age %></p>
+  <h3>Dog breed(s): </h3>
+  <% @dog.breeds.each do |breed|%>
+    <p><%= breed.name %></p>
+  <% end %>
 
-<% if @dog.user_id == Helpers.current_user(session).id %>
-  <a href="/dogs/<%= @dog.id %>/edit">Edit dog adoption details </a>
-  <br>
+  <% if @dog.user_id == Helpers.current_user(session).id %>
+    <a href="/dogs/<%= @dog.id %>/edit" class="btn btn-primary btn-sm">Edit dog adoption details <span class="glyphicon glyphicon-pencil"> </span> </a>
+    <br></br>
 
-  <form action="/dogs/<%= @dog.id %>/delete" method="post">
-    <input type="hidden" id="hidden" name="_method" value="delete">
-    <input type="submit" value="Remove dog for adoption">
-  </form>
-<% end %>
+    <form action="/dogs/<%= @dog.id %>/delete" method="post">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-primary btn-sm" name="button">Remove dog <span class="glyphicon glyphicon-trash"> </span></button>
+    </form>
+  <% end %>
+</div>

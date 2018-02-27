@@ -3,40 +3,44 @@
 <% end %>
 
 <div class="page-header">
-  <h1>Viewing all available dogs!</h1>
+  <h1>Viewing all available dogs</h1>
 <div class="page-header">
 
 <div class="jumbotron">
 
-  <% @dogs.each do |dog| %>
-    <div class="well well-sm">
+  <% if @dogs.empty? %>
+    <p>There are no dogs listed for adoption at this time. Please check back later, or post a new dog for adoption!</p>
+  <% else %>
+    <% @dogs.each do |dog| %>
+      <div class="well well-sm">
 
-      <h3><%= dog.name %></h3>
-      <h4>Age:</h4>
-      <p><%= dog.age %></p>
-      <h4>Breed(s):</h4>
-      <% dog.breeds.each do |breed|%>
-        <p><%= breed.name %></p>
-      <% end %>
+        <h3><%= dog.name %></h3>
+        <h4>Age:</h4>
+        <p><%= dog.age %></p>
+        <h4>Breed(s):</h4>
+        <% dog.breeds.each do |breed|%>
+          <p><%= breed.name %></p>
+        <% end %>
 
-      <% if dog.user_id == Helpers.current_user(session).id %>
-        <a href="/dogs/<%= dog.id %>/edit" class="btn btn-primary">Edit dog adoption details </a>
-        <br>
+        <% if dog.user_id == Helpers.current_user(session).id %>
+          <a href="/dogs/<%= dog.id %>/edit" class="btn btn-primary btn-xs">Edit dog adoption details <span class="glyphicon glyphicon-pencil"> </span> </a>
+          <br><br>
 
-        <form action="/dogs/<%= dog.id %>/delete" method="post">
-          <input type="hidden" id="hidden" name="_method" value="delete">
-          <input type="submit" class="btn btn-primary" value="Remove dog for adoption">
-        </form>
+          <form action="/dogs/<%= dog.id %>/delete" method="post">
+            <input type="hidden" id="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-primary btn-xs">Remove dog for adoption <span class="glyphicon glyphicon-trash"> </span></button>
+          </form>
 
-      <% else %>
-        <h4>Contact:</h4>
-        <p><%= dog.user.username %> -
-        <a><%= dog.user.email %></a></p>
-      <% end %>
-    </div>
+        <% else %>
+          <h4>Contact:</h4>
+          <p><%= dog.user.username %> -
+          <a><%= dog.user.email %></a></p>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
-
   <br><br>
+
   <a href="/dogs/new" class="btn btn-primary">Post a new dog for adoption <span class="glyphicon glyphicon-plus"> </span> </a>
   <br><br>
   <a href="/users/<%= @user.slug %>" class="btn btn-primary">View dogs you have listed <span class="glyphicon glyphicon-heart"> </span> </a>

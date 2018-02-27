@@ -1,26 +1,32 @@
 <div class="page-header">
-  <h1>Add a new dog for adoption!</h1>
+  <h1>Add a new dog for adoption</h1>
 </div>
 
-<form action="/dogs" method="post">
 
-  <label><h4>Name:</h4></label>
-  <input type="text" name="dog[name]">
+<div class="jumbotron">
+  <form action="/dogs" method="post">
 
-  <label><h4>Age:</h4></label>
-  <input type="text" name="dog[age]">
+    <label><h4>Name:</h4></label>
+    <input type="text" name="dog[name]">
+    <br>
+    <label><h4>Age:</h4></label>
+    <input type="text" name="dog[age]">
+    <br>
+    <label><h4>Breed(s):</h4></label>
 
-  <label><h4>Breed(s):</h4></label>
-  <h5>Choose from existing breed:</h5>
-    <% @breeds.each do |breed| %>
-       <label><%= breed.name %></label>
-       <input type="checkbox" id="<%= breed.id %>" name="dog[breed_ids][]" value="<%= breed.id %>"><br>
+    <% if !@breeds.empty? %>
+      <h5>Choose from existing breed:</h5>
+        <% @breeds.each do |breed| %>
+           <label><%= breed.name %></label>
+           <input type="checkbox" id="<%= breed.id %>" name="dog[breed_ids][]" value="<%= breed.id %>"><br>
+        <% end %>
+        <h5>and/or</h5>
     <% end %>
 
-  <h5>and/or create a new breed:<h5>
-  <input type="text" id="new_breed" name="breed[name]">
+    <h5>Create a new breed:<h5>
+    <input type="text" id="new_breed" name="breed[name]">
 
-  <br></br>
-  <input type="submit" class="btn btn-primary" value="Add new dog">
-
-</form>
+    <br></br>
+    <button type="submit" class="btn btn-primary">Add new dog <span class="glyphicon glyphicon-thumbs-up"> </span></button>
+  </form>
+</div>

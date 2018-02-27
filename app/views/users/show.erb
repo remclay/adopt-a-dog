@@ -2,26 +2,32 @@
   <h1>Dogs you have posted for adoption:</h1>
 </div>
 
-<% @dogs.each do |dog| %>
-  <h2><%= dog.name %></h2>
-  <h4>Dog age: </h4><%= dog.age %>
-  <h4>Dog breed(s): </h4>
-    <% dog.breeds.each do |breed|%>
-      <p><%= breed.name %></p>
-    <% end %>
+<div class="jumbotron">
 
-  <br></br>
-  <a href="/dogs/<%= dog.id %>/edit">Edit dog adoption details </a>
+  <% if @dogs.empty? %>
+      <p>You have no dogs currently listed for adoption.</p>
+  <% else %>
+    <% @dogs.each do |dog| %>
+      <div class="well well-sm">
+        <h2><%= dog.name %></h2>
+        <h4>Dog age: </h4><%= dog.age %>
+        <h4>Dog breed(s): </h4>
+          <% dog.breeds.each do |breed|%>
+            <p><%= breed.name %></p>
+          <% end %>
 
-  <br></br>
-  <form action="/dogs/<%= dog.id %>/delete" method="post">
-    <input type="hidden" id="hidden" name="_method" value="delete">
-    <input type="submit" value="Remove dog for adoption">
-  </form>
-  <br>
+        <a href="/dogs/<%= dog.id %>/edit" class="btn btn-primary btn-xs">Edit dog adoption details <span class="glyphicon glyphicon-pencil"> </span> </a>
+        <br><br>
 
-<% end %>
-
-<a href="/dogs/new" class="btn btn-primary">Post a new dog for adoption <span class="glyphicon glyphicon-plus"> </span> </a>
-<br><br>
-<a href="/logout" class="btn btn-link">Log out</a>
+        <form action="/dogs/<%= dog.id %>/delete" method="post">
+          <input type="hidden" id="hidden" name="_method" value="delete">
+          <button type="submit" class="btn btn-primary btn-xs">Remove dog for adoption <span class="glyphicon glyphicon-trash"> </span></button>
+        </form>
+      <% end %>
+    </div>
+  <% end %>
+<br>
+  <a href="/dogs/new" class="btn btn-primary">Post a new dog for adoption <span class="glyphicon glyphicon-plus"> </span> </a>
+  <br><br>
+  <a href="/logout" class="btn btn-link">Log out</a>
+</div>

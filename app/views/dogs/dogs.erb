@@ -6,33 +6,40 @@
   <h1>Viewing all available dogs!</h1>
 <div class="page-header">
 
-<br>
-<a href="/users/<%= @user.slug %>" class="btn btn-primary">Dogs I've listed</a>
-<br>
+<div class="jumbotron">
 
-<% @dogs.each do |dog| %>
+  <% @dogs.each do |dog| %>
+    <div class="well well-sm">
 
-  <h3><%= dog.name %></h3>
-  <h4>Age:</h4>
-  <p><%= dog.age %></p>
-  <h4>Breed(s):</h4>
-  <% dog.breeds.each do |breed|%>
-    <p><%= breed.name %></p>
+      <h3><%= dog.name %></h3>
+      <h4>Age:</h4>
+      <p><%= dog.age %></p>
+      <h4>Breed(s):</h4>
+      <% dog.breeds.each do |breed|%>
+        <p><%= breed.name %></p>
+      <% end %>
+
+      <% if dog.user_id == Helpers.current_user(session).id %>
+        <a href="/dogs/<%= dog.id %>/edit" class="btn btn-primary">Edit dog adoption details </a>
+        <br>
+
+        <form action="/dogs/<%= dog.id %>/delete" method="post">
+          <input type="hidden" id="hidden" name="_method" value="delete">
+          <input type="submit" class="btn btn-primary" value="Remove dog for adoption">
+        </form>
+
+      <% else %>
+        <h4>Contact:</h4>
+        <p><%= dog.user.username %> -
+        <a><%= dog.user.email %></a></p>
+      <% end %>
+    </div>
   <% end %>
 
-  <% if dog.user_id == Helpers.current_user(session).id %>
-    <a href="/dogs/<%= dog.id %>/edit" class="btn btn-primary">Edit dog adoption details </a>
-    <br>
-
-    <form action="/dogs/<%= dog.id %>/delete" method="post">
-      <input type="hidden" id="hidden" name="_method" value="delete">
-      <input type="submit" class="btn btn-primary" value="Remove dog for adoption">
-    </form>
-  <% end %>
-
-<% end %>
-
-<br>
-<a href="/dogs/new" class="btn btn-primary">Post a new dog for adoption</a>
-<br><br>
-<a href="/logout" class="btn btn-link">Log out</a>
+  <br><br>
+  <a href="/dogs/new" class="btn btn-primary">Post a new dog for adoption <span class="glyphicon glyphicon-plus"> </span> </a>
+  <br><br>
+  <a href="/users/<%= @user.slug %>" class="btn btn-primary">View dogs you have listed <span class="glyphicon glyphicon-heart"> </span> </a>
+  <br><br>
+  <a href="/logout" class="btn btn-link">Log out</a>
+</div>

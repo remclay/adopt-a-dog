@@ -53,8 +53,9 @@ class UsersController < ApplicationController
   get '/logout' do
     if Helpers.logged_in?(session)
       session.clear
-      redirect to '/login'
-    end
+      erb :'users/logout'
+    else
       redirect to '/'
+    end
   end
 end

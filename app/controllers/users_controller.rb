@@ -47,7 +47,11 @@ class UsersController < ApplicationController
       session[:id] = user.id
       flash[:message] = "Welcome back, #{user.username}!"
       redirect to "/dogs"
+    elsif user
+      flash[:message] = "Incorrect password."
+      redirect to '/login'
     else
+      flash[:message] = "Username does not exist. Please sign up."
       redirect to '/signup'
     end
   end

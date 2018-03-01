@@ -12,7 +12,8 @@
 
       <div class="well well-sm">
         <h2><%= dog.name %></h2>
-        <h4>Age: </h4><%= dog.age %>
+        <h4>Age: </h4>
+          <p><%= dog.age %></p>
         <h4>Breed(s): </h4>
           <% dog.breeds.each do |breed|%>
             <p><%= breed.name %></p>

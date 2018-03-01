@@ -8,6 +8,7 @@ class DogsController < ApplicationController
       @dogs = Dog.all
       @user = User.find_by_id(session[:id])
       erb :'dogs/dogs'
+      #erb :index
     else
       redirect to '/login'
     end
@@ -17,6 +18,7 @@ class DogsController < ApplicationController
     if Helpers.logged_in?(session)
       @breeds = Breed.all.uniq
       erb :'dogs/create_dog'
+      #erb :new
     else
       redirect to '/login'
     end
@@ -42,6 +44,7 @@ class DogsController < ApplicationController
     if Helpers.logged_in?(session)
       @dog = Dog.find_by_id(params[:id])
       erb :'dogs/show_dog'
+      #erb :show
     else
       redirect to '/login'
     end

@@ -8,10 +8,11 @@
       <p>You have no dogs currently listed for adoption.</p>
 
   <% else %>
+  <p>Click on a dog's name to view that dog's page</p>
     <% @dogs.each do |dog| %>
 
       <div class="well well-sm">
-        <h2><%= dog.name %></h2>
+        <h2><a href="/dogs/<%= dog.id %>"><%= dog.name %></a></h2>
         <p><b>Age: </b> <%= dog.age %></p>
 
         <p><b>Breed(s): </b></p>

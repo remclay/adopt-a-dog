@@ -7,10 +7,11 @@
   <% if @dogs.empty? %>
     <p>There are no dogs listed for adoption at this time. Please check back later, or post a new dog for adoption!</p>
   <% else %>
+  <p>Click on a dog's name to view more information</p>
     <% @dogs.each do |dog| %>
       <div class="well well-sm">
 
-        <h2><%= dog.name %></h2>
+        <h2><a href="/dogs/<%= dog.id %>"><%= dog.name %></a></h2>
         <br>
         <p><b>Age:  </b><%= dog.age %></p>
         <p><b>Breed(s):</b></p>

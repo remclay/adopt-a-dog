@@ -10,18 +10,24 @@
     <p><%= breed.name %></p>
   <% end %>
 
-<% if @dog.user_id == Helpers.current_user(session).id %>
-  <a href="/dogs/<%= @dog.id %>/edit" class="btn btn-primary btn-sm">Edit dog adoption details <span class="glyphicon glyphicon-pencil"> </span> </a>
+  <% if @dog.user_id == Helpers.current_user(session).id %>
+    <a href="/dogs/<%= @dog.id %>/edit" class="btn btn-primary btn-sm">Edit dog adoption details <span class="glyphicon glyphicon-pencil"> </span> </a>
+    <br></br>
+
+    <form action="/dogs/<%= @dog.id %>/delete" method="post">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+      <button type="submit" class="btn btn-primary btn-sm" name="button">Remove dog <span class="glyphicon glyphicon-trash"> </span></button>
+    </form>
+
+  <% else %>
+    <h4>Contact:</h4>
+    <p><%= @dog.user.username %> -
+    <a><%= @dog.user.email %></a></p>
+  <% end %>
+
+  <br>
+  <a href="/dogs" class="btn btn-primary btn-sm">View all available dogs <span class="glyphicon glyphicon"> </span> </a>
   <br></br>
-
-  <form action="/dogs/<%= @dog.id %>/delete" method="post">
-    <input type="hidden" id="hidden" name="_method" value="delete">
-    <button type="submit" class="btn btn-primary btn-sm" name="button">Remove dog <span class="glyphicon glyphicon-trash"> </span></button>
-  </form>
-
-<% else %>
-  <h4>Contact:</h4>
-  <p><%= @dog.user.username %> -
-  <a><%= @dog.user.email %></a></p>
-<% end %>
+  
+  <a href="/logout" class="btn btn-warning">Log out</a>
 </div>

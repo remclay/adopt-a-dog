@@ -20,7 +20,7 @@
     <div class="container">
 
       <% if flash.has?(:message) %>
-        <h3><span class="glyphicon glyphicon-exclamation-sign"> </span> <%= flash[:message] %></h3>
+        <h3><%= flash[:message] %></h3>
       <% end %>
 
       <%= yield %>

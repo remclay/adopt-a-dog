@@ -23,13 +23,13 @@ class DogsController < ApplicationController
   end
 
   post '/dogs' do
-    @dog = Dog.create(params[:dog])
+    @dog = Dog.new(params[:dog])
     if @dog.save
       @dog.user_id = session[:id]
       if params[:breed][:name] != ""
         @dog.breeds << Breed.create(params[:breed])
-        @dog.save
       end
+    @dog.save
     flash[:message] = "New dog successfully added for adoption!"
     redirect to "/dogs/#{@dog.id}"
     else

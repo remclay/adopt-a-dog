@@ -22,12 +22,13 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    @user = User.create(params)
-    if @user.save
-      session[:id] = @user.id
+    user = User.create(params)
+    if user.save
+      session[:id] = user.id
+      flash[:message] = "Welcome, #{user.username}!"
       redirect to '/dogs'
     else
-      flash[:message] = @user.errors.full_messages.first
+      flash[:message] = user.errors.full_messages.first
       redirect to '/signup'
     end
   end
@@ -43,7 +44,8 @@ class UsersController < ApplicationController
   post '/login' do
     user = User.find_by(:username => params[:username])
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+      session[:id] = user.id
+      flash[:message] = "Welcome back, #{user.username}!"
       redirect to "/dogs"
     else
       redirect to '/signup'

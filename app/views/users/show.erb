@@ -18,12 +18,12 @@
             <p><%= breed.name %></p>
           <% end %>
 
-        <a href="/dogs/<%= dog.id %>/edit" class="btn btn-primary btn-xs">Edit dog adoption details <span class="glyphicon glyphicon-pencil"> </span> </a>
+        <a href="/dogs/<%= dog.id %>/edit" class="btn btn-primary btn-xs">Edit details <span class="glyphicon glyphicon-pencil"> </span> </a>
         <br><br>
 
         <form action="/dogs/<%= dog.id %>/delete" method="post">
           <input type="hidden" id="hidden" name="_method" value="delete">
-          <button type="submit" class="btn btn-primary btn-xs">Remove dog for adoption <span class="glyphicon glyphicon-trash"> </span></button>
+          <button type="submit" class="btn btn-primary btn-xs">Remove dog <span class="glyphicon glyphicon-trash"> </span></button>
         </form>
         <br>
         </div>
@@ -32,9 +32,7 @@
 
   <br>
   <a href="/dogs/new" class="btn btn-primary">Post a new dog for adoption <span class="glyphicon glyphicon-plus"> </span> </a>
-  <br></br>
-
-  <a href="/dogs" class="btn btn-primary btn-sm">View all available dogs</a>
+  <a href="/dogs" class="btn btn-primary">View all available dogs</a>
   <br></br>
 
   <a href="/logout" class="btn btn-warning">Log out</a>

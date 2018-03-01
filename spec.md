@@ -15,7 +15,8 @@ has_many users, through dog_breeds.
 
 - [x] Include user input validations --> User class validates_presence_of username, email and password and validates that username is unique.
 
-- [x] Display validation failures to user with error message (example form URL e.g. /posts/new) -->
+- [x] Display validation failures to user with error message (example form URL e.g. /posts/new) --> Validation failures displayed via errors method for post '/signup' in UsersController (line 31), post 'dogs/new'
+(line 38) and patch 'dogs/:id' (line 79) in DogsController. Manual error messages entered in numerous places in both UsersController and DogsController. flash[:message] conditional contained in layout to avoid repetition.
 
 - [x] Your README.md includes a short description, install instructions, a contributors guide and a link to the license for your code
 

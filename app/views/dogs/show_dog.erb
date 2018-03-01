@@ -4,9 +4,9 @@
 
 <div class="jumbotron">
   <div class="well well-sm">
-    <h3>Dog age: </h3>
+    <h3>Age: </h3>
     <p><%= @dog.age %></p>
-    <h3>Dog breed(s): </h3>
+    <h3>Breed(s): </h3>
     <% @dog.breeds.each do |breed|%>
       <p><%= breed.name %></p>
     <% end %>
@@ -21,9 +21,8 @@
       </form>
 
     <% else %>
-      <h4>Contact:</h4>
-      <p><%= @dog.user.username %> -
-      <a><%= @dog.user.email %></a></p>
+      <h3>Contact:</h3>
+      <p><%= @dog.user.username %> - <a href="mailto:<%= @dog.user.email %>"><%= @dog.user.email %></a></p>
     <% end %>
   </div>
 

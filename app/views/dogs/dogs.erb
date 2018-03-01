@@ -11,6 +11,7 @@
       <div class="well well-sm">
 
         <h2><%= dog.name %></h2>
+        <br>
         <h4>Age:</h4>
         <p><%= dog.age %></p>
         <h4>Breed(s):</h4>
@@ -29,8 +30,7 @@
 
         <% else %>
           <h4>Contact:</h4>
-          <p><%= dog.user.username %> -
-          <a><%= dog.user.email %></a></p>
+          <p><%= dog.user.username %> - <a href="mailto:<%= dog.user.email %>"><%= dog.user.email %></a></p>
         <% end %>
       </div>
     <% end %>

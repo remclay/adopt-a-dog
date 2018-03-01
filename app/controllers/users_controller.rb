@@ -53,8 +53,10 @@ class UsersController < ApplicationController
   end
 
   get '/logout' do
-    if Helpers.logged_in?(session)
+    user = Helpers.current_user(session)
+    if user
       session.clear
+      flash[:message] = "Goodbye, #{user.username}"
       erb :'users/logout'
     else
       redirect to '/'

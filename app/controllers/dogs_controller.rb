@@ -43,6 +43,7 @@ class DogsController < ApplicationController
   get '/dogs/:id' do
     if Helpers.logged_in?(session)
       @dog = Dog.find_by_id(params[:id])
+      @user = Helpers.current_user(session)
       erb :'dogs/show_dog'
       #erb :'dogs/show'
     else

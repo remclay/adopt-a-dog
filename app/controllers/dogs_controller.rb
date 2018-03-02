@@ -74,6 +74,10 @@ class DogsController < ApplicationController
     @dog.update(params[:dog])
     if Helpers.logged_in?(session) && @dog.save
       if params[:breed][:name] != ""
+        if !Breed.all.collect{|b| b.name}.include?(params[:breed][:name])
+          @dog.breeds << Breed.create(params[:breed])
+        else @dog.breeds << Breed.find_by(name: params[:breed][:name])
+        end
         @dog.breeds << Breed.create(params[:breed])
         @dog.save
       end

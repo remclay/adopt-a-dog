@@ -6,10 +6,10 @@
   <div class="well well-sm">
     <form action="/dogs" method="post">
 
-      <label><h4>Name*:</h4></label>
+      <label><h4>Name:*</h4></label>
       <input type="text" name="dog[name]">
       <br>
-      <label><h4>Age*:</h4></label>
+      <label><h4>Age:*</h4></label>
       <input type="text" name="dog[age]">
       <br>
       <label><h4>Breed(s):</h4></label>
@@ -27,8 +27,9 @@
       <input type="text" id="new_breed" name="breed[name]">
       <br></br>
 
-      <label><h4>Description:</h4></label>
-      <input type="text" name="dog[description]">
+      <label><h4>Description:</h4></label><br>
+      <!-- <input type="text" name="dog[description]"> -->
+      <textarea name="dog[description]" cols="24" rows="5"></textarea>
       <br></br>
 
       <h6>* required</h6>

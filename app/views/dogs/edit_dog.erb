@@ -7,11 +7,11 @@
     <form action="/dogs/<%= @dog.id %>" method="post">
       <input type="hidden" id="hidden" name="_method" value="patch">
 
-      <label><h4>Name:</h4></label>
+      <label><h4>Name:*</h4></label>
       <input type="text" name="dog[name]" value="<%= @dog.name %>">
       <br>
 
-      <label><h4>Age:</h4></label>
+      <label><h4>Age:*</h4></label>
       <input type="text" name="dog[age]" value="<%= @dog.age %>">
       <br>
 
@@ -28,13 +28,16 @@
       <br></br>
 
       <label><h4>Description:</h4></label>
-      <input type="text" name="dog[description]" value="<%= @dog.description %>">
       <br>
+      <!-- <input type="text" name="dog[description]" value="<%= @dog.description %>"> -->
+      <textarea name="dog[description]" cols="24" rows="5"><%= @dog.description %></textarea>
+      <br></br>
 
+      <h6>* required</h6>
       <button type="submit" class="btn btn-primary" name="button">Update details <span class="glyphicon glyphicon-thumbs-up"> </span></button>
     </form>
-    <br></br>
-
+    <br>
+    
     <a href="/dogs/<%= @dog.id %>" class="btn btn-primary">Cancel <span class="glyphicon glyphicon-remove-circle"> </span></a>
   </div>
 </div>

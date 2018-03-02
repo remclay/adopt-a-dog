@@ -29,7 +29,10 @@ class DogsController < ApplicationController
     if @dog.save
       @dog.user_id = session[:id]
       if params[:breed][:name] != ""
-        @dog.breeds << Breed.create(params[:breed])
+        if !Breed.all.collect{|b| b.name}.include?(params[:breed][:name])
+          @dog.breeds << Breed.create(params[:breed])
+        else @dog.breeds << Breed.find_by(name: params[:breed][:name])
+        end
       end
     @dog.save
     flash[:message] = "New dog successfully added for adoption!"

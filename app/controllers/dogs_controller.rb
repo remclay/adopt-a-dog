@@ -58,6 +58,7 @@ class DogsController < ApplicationController
   get '/dogs/:id/edit' do
     if @user = Helpers.current_user(session)
       @dog = Dog.find_by_id(params[:id])
+      @breeds = Breed.all
       if @user && @user.id = @dog.user_id
         erb :'/dogs/edit_dog'
         # erb :'dogs/edit'
@@ -71,15 +72,17 @@ class DogsController < ApplicationController
 
   patch '/dogs/:id' do
     @dog = Dog.find_by_id(params[:id])
-    @dog.update(params[:dog])
-    if Helpers.logged_in?(session) && @dog.save
+    if @dog.update(params[:dog]) && Helpers.logged_in?(session)
+      @dog.update(params[:dog])
+      if params[:dog][:breed_ids] == nil
+        @dog.breed_ids = []
+      end
       if params[:breed][:name] != ""
         if !Breed.all.collect{|b| b.name}.include?(params[:breed][:name])
           @dog.breeds << Breed.create(params[:breed])
         else @dog.breeds << Breed.find_by(name: params[:breed][:name])
         end
-        @dog.breeds << Breed.create(params[:breed])
-        @dog.save
+      @dog.save
       end
       flash[:message] = "Dog adoption details successfully updated!"
       redirect to "/dogs/#{@dog.id}"

@@ -17,7 +17,7 @@
 
       <label><h4>Breed(s):</h4></label>
       <h5>Choose from existing breed:</h5>
-      <% @dog.breeds.each do |breed| %>
+      <% @breeds.each do |breed| %>
          <label><%= breed.name %></label>
          <input type="checkbox" id="<%= breed.id %>" name="dog[breed_ids][]" value="<%= breed.id %>" <%='checked' if @dog.breeds.include?(breed) %>>
          <br>
@@ -37,7 +37,7 @@
       <button type="submit" class="btn btn-primary" name="button">Update details <span class="glyphicon glyphicon-thumbs-up"> </span></button>
     </form>
     <br>
-    
+
     <a href="/dogs/<%= @dog.id %>" class="btn btn-primary">Cancel <span class="glyphicon glyphicon-remove-circle"> </span></a>
   </div>
 </div>

@@ -10,6 +10,12 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    user = Helpers.current_user(session)
+    if user
+      flash[:message] = "Welcome back, #{user.username}!"
+      redirect to '/dogs'
+    else
+      erb :home
+    end
   end
 end

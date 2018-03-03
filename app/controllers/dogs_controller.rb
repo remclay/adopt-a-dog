@@ -65,7 +65,8 @@ class DogsController < ApplicationController
 
   patch '/dogs/:id' do
     @dog = Dog.find_by_id(params[:id])
-    if @dog.update(params[:dog]) && Helpers.logged_in?(session)
+    @user = Helpers.current_user(session)
+    if @dog.update(params[:dog]) && @user.id == @dog.user_id
       @dog.update(params[:dog])
       if params[:dog][:breed_ids] == nil
         @dog.breed_ids = []
@@ -87,12 +88,11 @@ class DogsController < ApplicationController
 
   #DELETE
   delete '/dogs/:id/delete' do
-    if Helpers.logged_in?(session)
-      @dog = Dog.find_by_id(params[:id])
-      if @dog && @dog.user = Helpers.current_user(session)
-        @dog.delete
-        flash[:message] = "Dog successfully removed from adoption!"
-      end
+    @user = Helpers.current_user(session)
+    @dog = Dog.find_by_id(params[:id])
+    if @user && @dog && @dog.user_id == @user.id
+      @dog.delete
+      flash[:message] = "Dog successfully removed from adoption!"
       redirect to '/dogs'
     else
       redirect to '/login'

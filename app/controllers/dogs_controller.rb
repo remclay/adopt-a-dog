@@ -7,8 +7,7 @@ class DogsController < ApplicationController
     if Helpers.logged_in?(session)
       @dogs = Dog.all
       @user = User.find_by_id(session[:id])
-      erb :'dogs/dogs'
-      #erb :'dogs/index'
+      erb :'dogs/index'
     else
       redirect to '/login'
     end
@@ -17,8 +16,7 @@ class DogsController < ApplicationController
   get '/dogs/new' do
     if Helpers.logged_in?(session)
       @breeds = Breed.all.uniq
-      erb :'dogs/create_dog'
-      #erb :'dogs/new'
+      erb :'dogs/new'
     else
       redirect to '/login'
     end
@@ -47,8 +45,7 @@ class DogsController < ApplicationController
     if Helpers.logged_in?(session)
       @dog = Dog.find_by_id(params[:id])
       @user = Helpers.current_user(session)
-      erb :'dogs/show_dog'
-      #erb :'dogs/show'
+      erb :'dogs/show'
     else
       redirect to '/login'
     end
@@ -60,8 +57,7 @@ class DogsController < ApplicationController
       @dog = Dog.find_by_id(params[:id])
       @breeds = Breed.all
       if @user && @user.id = @dog.user_id
-        erb :'/dogs/edit_dog'
-        # erb :'dogs/edit'
+        erb :'/dogs/edit'
       else
         redirect to '/login'
       end

@@ -58,8 +58,6 @@ class DogsController < ApplicationController
       @breeds = Breed.all
       if @user && @user.id = @dog.user_id
         erb :'/dogs/edit'
-      else
-        redirect to '/login'
       end
     else
       redirect to '/login'

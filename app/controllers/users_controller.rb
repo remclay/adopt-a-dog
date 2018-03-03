@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = User.find_by_slug(params[:slug])
     if @user
       @dogs = @user.dogs
-      erb :'users/show'
+      erb :'users/index'
     else
       redirect to '/login'
     end
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !Helpers.logged_in?(session)
-      erb :'users/create_user'
+      erb :'users/new'
     else
       redirect to '/dogs'
     end

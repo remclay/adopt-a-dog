@@ -73,8 +73,8 @@ class DogsController < ApplicationController
       end
       if params[:breed][:name] != ""
         if !Breed.all.collect{|b| b.name}.include?(params[:breed][:name])
-          @dog.breeds << Breed.create(params[:breed])
-        else @dog.breeds << Breed.find_by(name: params[:breed][:name])
+          @dog.breeds.create(params[:breed])
+        else @dog.breeds.find_by(name: params[:breed][:name])
         end
       @dog.save
       end

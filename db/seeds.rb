@@ -4,6 +4,7 @@
 peter = User.create({username: "Peter D", email: "peter@gmail.com", password: "enter58"})
 kate = User.create({username: "Kate Greenburgh", email: "kate_dog_lover@gmail.com", password: "adoptdontshop"})
 lou = User.create({username: "Miss Lou", email: "louise_grant@yahoo.com", password: "931passw0rd"})
+john = User.create({username: "john@example.com", email: "john@example.com", password: "testing"})
 
 # Breeds
 maltese = Breed.create(name: "Maltese")

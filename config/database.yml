@@ -1,0 +1,17 @@
+development:
+  adapter: sqlite3
+  database: adopt_a_dog_development
+  pool: 5
+  timeout: 5000
+
+test:
+  adapter: postgresql
+  database: adopt_a_dog_test
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  database: adopt_a_dog_production
+  pool: 5
+  timeout: 5000

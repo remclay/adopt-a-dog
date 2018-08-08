@@ -2,11 +2,18 @@ require 'bundler/setup'
 Bundler.require
 
 configure :development do
-  set :database, {adapter: 'postgresql',  encoding: 'unicode', database: 'adopt_a_dog_development', pool: 2}
+  ActiveRecord::Base.establish_connection(
+    adapter: 'postgresql',
+    database: 'adopt_a_dog_development'
+  )
 end
 
 configure :production do
-  set :database, {adapter: 'postgresql',  encoding: 'unicode', database: 'adopt_a_dog_production', pool: 5}
+  ActiveRecord::Base.establish_connection(
+    adapter: 'postgresql',
+    database: 'adopt_a_dog_production',
+    pool: 5
+  )
 end
 
 # configure :development do

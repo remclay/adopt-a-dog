@@ -1,5 +1,5 @@
 development:
-  adapter: postgresql
+  adapter: sqlite3
   database: adopt_a_dog_development
   pool: 5
   timeout: 5000
@@ -11,7 +11,8 @@ test:
   timeout: 5000
 
 production:
+  url: <%= ENV['DATABASE_URL'] %>
   adapter: postgresql
-  database: adopt_a_dog_production
+  database: mydb
   pool: 5
   timeout: 5000
